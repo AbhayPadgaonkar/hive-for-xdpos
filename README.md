@@ -2,6 +2,29 @@
 
 Hive is a system for running integration tests against Ethereum clients.
 
+This fork extends Hive with support for testing **XDC Network** clients alongside
+standard Ethereum clients. It adds:
+
+- `clients/xdpos` — XDC Core Node (`xinfinorg/xinfin-testnet-node`)
+- `clients/xdc-gateway` — XDC Gateway RPC proxy (Geth upstream + Node.js proxy)
+- `simulators/smoke/xdc` — XDC-specific smoke tests including two-node peering
+- `simulators/xdc/rpc-compat` — XDC-specific JSON-RPC compatibility tests
+
+Current results on Windows 11 + Docker Desktop + Go 1.24:
+
+| Client | smoke/genesis | ethereum/rpc-compat | xdc/rpc-compat | smoke/xdc |
+|--------|---------------|---------------------|----------------|-----------|
+| `go-ethereum` | 6/6 | 226/227 | — | — |
+| `xdc-gateway` | 6/6 | 226/227 | — | — |
+| `xdpos` | 0/6* | N/A | 15/15 | 11/11 |
+
+`*xdpos` fails standard `smoke/genesis` because XDPoS consensus requires a
+different genesis format than standard Ethereum. Use the XDC-specific simulators
+for meaningful `xdpos` results.
+
+See `HIVE_TESTING_REPORT.md` and `HIVE_LOG_GUIDE.md` for detailed setup and
+results.
+
 Ethereum Foundation maintains two public Hive instances to check for consensus, p2p and
 blockchain compatibility:
 
