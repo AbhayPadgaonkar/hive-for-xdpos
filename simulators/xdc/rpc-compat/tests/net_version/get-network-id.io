@@ -1,0 +1,3 @@
+// net_version returns the network ID.
+>> {"jsonrpc":"2.0","id":1,"method":"net_version","params":[]}
+<< {"jsonrpc":"2.0","id":1,"result":"89"}
