@@ -163,32 +163,42 @@ func (b *ContainerBackend) StartContainer(ctx context.Context, containerID strin
 	info.Wait = func() { <-containerExit }
 
 	// Get the IP. This can only be done after the container has started.
-	inspect := docker.InspectContainerOptions{Context: ctx, ID: containerID}
-	container, err := b.client.InspectContainerWithOptions(inspect)
-	if err != nil {
-		waiter.Close()
-		b.DeleteContainer(containerID)
-		info.Wait()
-		info.Wait = nil
-		return info, err
-	}
-	info.IP = container.NetworkSettings.IPAddress
-	info.MAC = container.NetworkSettings.MacAddress
-	// On some Docker setups (e.g. Docker Desktop for macOS), the top-level
-	// NetworkSettings.IPAddress field may be empty even though the container
-	// has an IP on the bridge network. Fall back to checking the per-network
-	// endpoint settings.
-	if info.IP == "" {
-		for name, network := range container.NetworkSettings.Networks {
-			if network.IPAddress != "" {
-				logger.Debug("using IP from network endpoint (top-level IPAddress was empty)", "network", name, "ip", network.IPAddress)
-				info.IP = network.IPAddress
-				if info.MAC == "" {
-					info.MAC = network.MacAddress
+	// Retry a few times because the network settings may not be immediately
+	// available on some Docker setups (e.g. Docker Desktop for Windows).
+	var container *docker.Container
+	for i := 0; i < 5; i++ {
+		inspect := docker.InspectContainerOptions{Context: ctx, ID: containerID}
+		container, err = b.client.InspectContainerWithOptions(inspect)
+		if err != nil {
+			waiter.Close()
+			b.DeleteContainer(containerID)
+			info.Wait()
+			info.Wait = nil
+			return info, err
+		}
+		info.IP = container.NetworkSettings.IPAddress
+		info.MAC = container.NetworkSettings.MacAddress
+		// On some Docker setups (e.g. Docker Desktop for macOS), the top-level
+		// NetworkSettings.IPAddress field may be empty even though the container
+		// has an IP on the bridge network. Fall back to checking the per-network
+		// endpoint settings.
+		if info.IP == "" {
+			for name, network := range container.NetworkSettings.Networks {
+				if network.IPAddress != "" {
+					logger.Debug("using IP from network endpoint (top-level IPAddress was empty)", "network", name, "ip", network.IPAddress)
+					info.IP = network.IPAddress
+					if info.MAC == "" {
+						info.MAC = network.MacAddress
+					}
+					break
 				}
-				break
 			}
 		}
+		if info.IP != "" {
+			break
+		}
+		logger.Debug("container has no IP address yet, retrying", "attempt", i+1)
+		time.Sleep(200 * time.Millisecond)
 	}
 	if info.IP == "" {
 		waiter.Close()
@@ -477,6 +487,7 @@ type fileCloser struct {
 	logger    *slog.Logger
 	closers   []io.Closer
 	closeOnce sync.Once
+	wCloseOnce sync.Once
 }
 
 func newFileCloser(logger *slog.Logger) *fileCloser {
@@ -490,7 +501,15 @@ func (w *fileCloser) Wait() error {
 }
 
 func (w *fileCloser) Close() error {
-	err := w.w.Close()
+	var err error
+	w.wCloseOnce.Do(func() {
+		defer func() {
+			if r := recover(); r != nil {
+				w.logger.Debug("recovered from panic in container waiter close", "panic", r)
+			}
+		}()
+		err = w.w.Close()
+	})
 	w.closeFiles()
 	return err
 }
