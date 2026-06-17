@@ -1,0 +1,32 @@
+## Build XDC Core Node from source (alternative Dockerfile)
+
+ARG baseimage=golang
+ARG tag=1.22
+
+FROM $baseimage:$tag as builder
+
+RUN apt-get update && apt-get install -y git make gcc libc6-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ARG branch=master
+RUN git clone --depth 1 --branch $branch https://github.com/XinFinOrg/XDPoSChain.git /xdc-build
+WORKDIR /xdc-build
+RUN make all
+
+FROM ubuntu:22.04
+RUN apt-get update && apt-get install -y jq curl bash \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /xdc-build/build/bin/XDC /usr/local/bin/XDC
+
+RUN /usr/local/bin/XDC version | head -1 > /version.txt
+
+ADD xdpos.sh /xdpos.sh
+ADD mapper.jq /mapper.jq
+ADD enode.sh /hive-bin/enode.sh
+ADD genesis.json /genesis.json
+RUN chmod +x /xdpos.sh /hive-bin/enode.sh
+
+EXPOSE 8545 8546 8547 8551 30303 30303/udp
+
+ENTRYPOINT ["/xdpos.sh"]
