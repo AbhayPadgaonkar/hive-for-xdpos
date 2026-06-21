@@ -16,7 +16,7 @@ Current results on Windows 11 + Docker Desktop + Go 1.24:
 |--------|---------------|---------------------|----------------|-----------|
 | `go-ethereum` | 6/6 | 226/227 | — | — |
 | `xdc-gateway` | 6/6 | 226/227 | — | — |
-| `xdpos` | 0/6* | N/A | 15/15 | 11/11 |
+| `xdpos` | 0/6* | N/A | 66/66 | 11/11 |
 
 `*xdpos` fails standard `smoke/genesis` because XDPoS consensus requires a
 different genesis format than standard Ethereum. Use the XDC-specific simulators

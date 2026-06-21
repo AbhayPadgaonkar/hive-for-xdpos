@@ -1,0 +1,3 @@
+// admin_nodeInfo returns node identity information.
+>> {"jsonrpc":"2.0","id":1,"method":"admin_nodeInfo","params":[]}
+<< {"jsonrpc":"2.0","id":1,"result":{"name":"XDC/v1.0.0-stable/linux-amd64/go1.11.6","protocols":{"eth":{"network":89,"difficulty":1,"genesis":"0xbdea512b4f12ff1135ec92c00dc047ffb93890c2ea1aa0eefe9b013d80640075","config":{"chainId":51,"homesteadBlock":1,"eip150Block":2,"eip150Hash":"0x0000000000000000000000000000000000000000000000000000000000000000","eip155Block":3,"eip158Block":3,"byzantiumBlock":4,"XDPoS":{"period":2,"epoch":900,"reward":5000,"rewardCheckpoint":900,"gap":450,"foudationWalletAddr":"xdc0000000000000000000000000000000000000000"}},"head":"0xbdea512b4f12ff1135ec92c00dc047ffb93890c2ea1aa0eefe9b013d80640075"}}}}

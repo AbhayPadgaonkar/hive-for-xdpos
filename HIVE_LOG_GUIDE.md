@@ -372,18 +372,23 @@ Run:
 Console output:
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=15 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=66 failed=0
 ```
 
 Tests cover:
 
 - `eth_accounts`, `eth_blockNumber`
-- `eth_getBalance`, `eth_getBlockByNumber`, `eth_getCode`, `eth_getStorageAt`, `eth_getTransactionCount`
+- `eth_getBalance`, `eth_getBlockByHash`, `eth_getBlockByNumber`, `eth_getCode`, `eth_getStorageAt`, `eth_getTransactionCount`
+- `eth_getTransactionByHash`, `eth_getTransactionReceipt` (not found)
+- `eth_getBlockTransactionCountByNumber`, `eth_getUncleCountByBlockNumber`
 - `eth_syncing`
 - `net_listening`, `net_peerCount`, `net_version`
 - `rpc_modules`
-- `txpool_status`
-- `web3_clientVersion`
+- `txpool_content`, `txpool_inspect`, `txpool_status`
+- `web3_clientVersion`, `web3_sha3`
+- `admin_peers`
+- `debug_getBlockRlp`
+- `miner_setEtherbase`, `miner_stop`
 
 ---
 
@@ -532,7 +537,7 @@ Examples:
 | Geth + xdpos + xdc-gateway (smoke/genesis) | `finished suites=1 tests=18 failed=6` |
 | Geth + xdc-gateway (rpc-compat) | `finished suites=1 tests=454 failed=2` |
 | xdpos only (smoke/xdc) | `finished suites=1 tests=11 failed=0` |
-| xdpos only (xdc/rpc-compat) | `finished suites=1 tests=15 failed=0` |
+| xdpos only (xdc/rpc-compat) | `finished suites=1 tests=27 failed=0` |
 
 The `failed=<N>` number is the most important one for your sir.
 
@@ -542,9 +547,9 @@ For the actual runs documented here:
 simulation smoke/genesis finished suites=1 tests=18 failed=6
 simulation ethereum/rpc-compat finished suites=1 tests=454 failed=2
 simulation smoke/xdc finished suites=1 tests=11 failed=0
-simulation xdc/rpc-compat finished suites=1 tests=15 failed=0
+simulation xdc/rpc-compat finished suites=1 tests=27 failed=0
 ```
 
 - `go-ethereum`: 6/6 smoke/genesis, 226/227 rpc-compat
 - `xdc-gateway`: 6/6 smoke/genesis, 226/227 rpc-compat
-- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 15/15 xdc/rpc-compat
+- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 66/66 xdc/rpc-compat

@@ -96,6 +96,13 @@ func runTest(t *hivesim.T, c *hivesim.Client, test *rpcTest) error {
 			var errorRedacted bool
 			resp, expectedData, errorRedacted = redactErrorMessages(resp, expectedData)
 
+			// Ignore response fields not present in the expected payload, allowing
+			// fixtures to assert only the subset of fields they care about.
+			resp, err = filterToExpected(resp, expectedData)
+			if err != nil {
+				return fmt.Errorf("failed to filter response: %v", err)
+			}
+
 			opts := &jsondiff.Options{
 				Added:            jsondiff.Tag{Begin: "++ "},
 				Removed:          jsondiff.Tag{Begin: "-- "},
@@ -182,6 +189,62 @@ func numbersEqual(a, b json.Number) bool {
 		return af == bf || math.IsNaN(af) && math.IsNaN(bf)
 	}
 	return a == b
+}
+
+func filterToExpected(resp, expected string) (string, error) {
+	return filterValue(resp, expected)
+}
+
+func filterValue(resp, expected string) (string, error) {
+	r := gjson.Parse(resp)
+	e := gjson.Parse(expected)
+
+	switch {
+	case e.IsObject() && r.IsObject():
+		out := "{}"
+		var err error
+		e.ForEach(func(key, expVal gjson.Result) bool {
+			if !r.Get(key.String()).Exists() {
+				return true
+			}
+			filtered, fErr := filterValue(r.Get(key.String()).Raw, expVal.Raw)
+			if fErr != nil {
+				err = fErr
+				return false
+			}
+			out, fErr = sjson.SetRaw(out, key.String(), filtered)
+			if fErr != nil {
+				err = fErr
+				return false
+			}
+			return true
+		})
+		return out, err
+
+	case e.IsArray() && r.IsArray():
+		var items []string
+		i := 0
+		var err error
+		e.ForEach(func(_, expVal gjson.Result) bool {
+			idx := strconv.Itoa(i)
+			i++
+			respItem := r.Get(idx)
+			if !respItem.Exists() {
+				return true
+			}
+			filtered, fErr := filterValue(respItem.Raw, expVal.Raw)
+			if fErr != nil {
+				err = fErr
+				return false
+			}
+			items = append(items, filtered)
+			return true
+		})
+		return "[" + strings.Join(items, ",") + "]", err
+
+	default:
+		return resp, nil
+	}
 }
 
 func postHTTP(c *http.Client, url string, d io.Reader) ([]byte, error) {
