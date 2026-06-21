@@ -372,23 +372,25 @@ Run:
 Console output:
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=66 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=102 failed=0
 ```
 
 Tests cover:
 
 - `eth_accounts`, `eth_blockNumber`
-- `eth_getBalance`, `eth_getBlockByHash`, `eth_getBlockByNumber`, `eth_getCode`, `eth_getStorageAt`, `eth_getTransactionCount`
+- `eth_getBalance` (all genesis accounts), `eth_getBlockByHash`, `eth_getBlockByNumber` (genesis, earliest, full transactions, not found), `eth_getCode`, `eth_getStorageAt` (validator slots 0x7-0xf), `eth_getTransactionCount`
 - `eth_getTransactionByHash`, `eth_getTransactionReceipt` (not found)
-- `eth_getBlockTransactionCountByNumber`, `eth_getUncleCountByBlockNumber`
+- `eth_getBlockTransactionCountByNumber`, `eth_getUncleCountByBlockNumber`, `eth_getUncleByBlockNumberAndIndex`, `eth_getUncleByBlockHashAndIndex`
+- `eth_getBlockReceipts`, `eth_getProof`, `eth_getCompensation`, `txpool_contentFrom`, `personal_listAccounts`, `eth_chainId`, `eth_feeHistory` (unsupported on this XDC build)
 - `eth_syncing`
 - `net_listening`, `net_peerCount`, `net_version`
 - `rpc_modules`
 - `txpool_content`, `txpool_inspect`, `txpool_status`
 - `web3_clientVersion`, `web3_sha3`
-- `admin_peers`
-- `debug_getBlockRlp`
+- `admin_peers`, `admin_datadir`, `admin_nodeInfo`
+- `debug_dumpBlock`, `debug_getBadBlocks`, `debug_getBlockRlp`, `debug_traceTransaction`
 - `miner_setEtherbase`, `miner_stop`
+- XDPoS-specific: `eth_getCandidateStatus`, `eth_getMasternodes`, `eth_getMasternodeInfo`, `eth_getVoters`, `eth_getRewards`, `eth_getBlockFinality`
 
 ---
 
@@ -552,4 +554,4 @@ simulation xdc/rpc-compat finished suites=1 tests=27 failed=0
 
 - `go-ethereum`: 6/6 smoke/genesis, 226/227 rpc-compat
 - `xdc-gateway`: 6/6 smoke/genesis, 226/227 rpc-compat
-- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 66/66 xdc/rpc-compat
+- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 102/102 xdc/rpc-compat

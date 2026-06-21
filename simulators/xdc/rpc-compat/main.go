@@ -24,6 +24,10 @@ var files = map[string]string{
 }
 
 func main() {
+	runTestSuiteMain()
+}
+
+func runTestSuiteMain() {
 	suite := hivesim.Suite{
 		Name: "xdc-rpc-compat",
 		Description: `
