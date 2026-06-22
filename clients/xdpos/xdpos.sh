@@ -87,8 +87,8 @@ if [ -d /blocks ]; then
 fi
 
 # JSON-RPC / WS.
-FLAGS="$FLAGS --rpc --rpcaddr 0.0.0.0 --rpcport 8545 --rpcapi admin,debug,eth,miner,net,txpool,web3,testing"
-FLAGS="$FLAGS --ws --wsaddr 0.0.0.0 --wsport 8546 --wsorigins '*' --wsapi admin,debug,eth,miner,net,txpool,web3,testing"
+FLAGS="$FLAGS --rpc --rpcaddr 0.0.0.0 --rpcport 8545 --rpcapi admin,debug,eth,miner,net,txpool,web3,testing,XDPoS"
+FLAGS="$FLAGS --ws --wsaddr 0.0.0.0 --wsport 8546 --wsorigins '*' --wsapi admin,debug,eth,miner,net,txpool,web3,testing,XDPoS"
 FLAGS="$FLAGS --rpcvhosts '*'"
 
 # Determine external IP for NAT.

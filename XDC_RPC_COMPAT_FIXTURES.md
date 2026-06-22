@@ -3,7 +3,7 @@
 This document tracks which RPC fixtures are implemented for the `xdpos` client in `simulators/xdc/rpc-compat/tests/`.
 
 Last updated: 2026-06-22
-Current passing count: **133/133**
+Current passing count: **160/160**
 
 ## Legend
 
@@ -17,7 +17,7 @@ Current passing count: **133/133**
 
 | Fixture | Status | Notes |
 |---------|--------|-------|
-| `admin_addPeer` | [ ] | supported; needs valid enode arg |
+| `admin_addPeer` | [x] | valid enode returns true |
 | `admin_addTrustedPeer` | [x] | unsupported negative fixture |
 | `admin_datadir` | [x] | |
 | `admin_exportChain` | [x] | |
@@ -25,7 +25,7 @@ Current passing count: **133/133**
 | `admin_nodeInfo` | [x] | |
 | `admin_peerEvents` | [x] | unsupported negative fixture |
 | `admin_peers` | [x] | |
-| `admin_removePeer` | [ ] | supported; needs valid enode arg |
+| `admin_removePeer` | [x] | valid enode returns true |
 | `admin_removeTrustedPeer` | [x] | unsupported negative fixture |
 | `admin_startHTTP` | [-] | unsupported on this XDC build |
 | `admin_startRPC` | [-] | unsupported on this XDC build |
@@ -45,18 +45,18 @@ Current passing count: **133/133**
 | `debug_dumpBlock` | [x] | |
 | `debug_getBadBlocks` | [x] | |
 | `debug_getBlockRlp` | [x] | |
-| `debug_getModifiedAccountsByHash` | [ ] | supported; returns error at genesis |
-| `debug_getModifiedAccountsByNumber` | [ ] | supported; returns error at genesis |
+| `debug_getModifiedAccountsByHash` | [x] | genesis error negative |
+| `debug_getModifiedAccountsByNumber` | [x] | genesis error negative |
 | `debug_intermediateRoots` | [-] | unsupported on this XDC build |
 | `debug_preimage` | [x] | missing preimage negative |
 | `debug_printBlock` | [x] | asserts only presence of result |
 | `debug_setHead` | [-] | local-only (PrivateDebugAPI) |
-| `debug_storageRangeAt` | [ ] | supported; returns error at genesis |
+| `debug_storageRangeAt` | [x] | genesis error negative |
 | `debug_traceBadBlock` | [-] | unsupported on this XDC build |
-| `debug_traceBlock` | [ ] | supported; returns error at genesis |
-| `debug_traceBlockByHash` | [ ] | supported; returns error at genesis |
-| `debug_traceBlockByNumber` | [ ] | supported; returns error at genesis |
-| `debug_traceBlockFromFile` | [ ] | supported; returns error at genesis |
+| `debug_traceBlock` | [x] | genesis error negative |
+| `debug_traceBlockByHash` | [x] | genesis error negative |
+| `debug_traceBlockByNumber` | [x] | genesis error negative |
+| `debug_traceBlockFromFile` | [x] | missing file negative |
 | `debug_traceCall` | [-] | unsupported on this XDC build |
 | `debug_traceChain` | [-] | unsupported on this XDC build |
 | `debug_traceTransaction` | [x] | not-found negative |
@@ -131,7 +131,7 @@ Current passing count: **133/133**
 | `eth_sendRawTransaction` | [x] | invalid tx negative |
 | `eth_sendTransaction` | [x] | IPC-only negative |
 | `eth_sign` | [x] | no account negative |
-| `eth_signTransaction` | [ ] | supported over IPC; HTTP returns error |
+| `eth_signTransaction` | [x] | no account negative |
 | `eth_simulateV1` | [-] | unsupported on this XDC build |
 | `eth_submitHashrate` | [x] | |
 | `eth_submitWork` | [x] | |
@@ -192,31 +192,25 @@ Current passing count: **133/133**
 
 | Fixture | Status | Notes |
 |---------|--------|-------|
-| `XDPoS_getSnapshot` | [ ] | supported; returns genesis snapshot |
-| `XDPoS_getSnapshotAtHash` | [ ] | supported; needs hash arg |
-| `XDPoS_getSigners` | [ ] | supported; returns genesis signers |
-| `XDPoS_getSignersAtHash` | [ ] | supported; needs hash arg |
-| `XDPoS_getMasternodesByNumber` | [-] | unsupported on this XDC build |
-| `XDPoS_getLatestPoolStatus` | [-] | unsupported on this XDC build |
-| `XDPoS_getV2BlockByHeader` | [-] | unsupported on this XDC build |
-| `XDPoS_getV2BlockByNumber` | [-] | unsupported on this XDC build |
-| `XDPoS_getV2BlockByHash` | [-] | unsupported on this XDC build |
-| `XDPoS_networkInformation` | [-] | unsupported on this XDC build |
-| `XDPoS_config` | [-] | unsupported on this XDC build |
-| `XDPoS_getMissedRoundsInEpochByBlockNum` | [-] | unsupported on this XDC build |
-| `XDPoS_getRewardByAccount` | [-] | unsupported on this XDC build |
-| `XDPoS_getEpochNumbersBetween` | [-] | unsupported on this XDC build |
-| `XDPoS_getBlockInfoByV2EpochNum` | [-] | unsupported on this XDC build |
-| `XDPoS_calculateBlockInfoByV1EpochNum` | [-] | unsupported on this XDC build |
-| `XDPoS_getBlockInfoByEpochNum` | [-] | unsupported on this XDC build |
+| `XDPoS_getSnapshot` | [x] | genesis snapshot |
+| `XDPoS_getSnapshotAtHash` | [x] | genesis snapshot by hash |
+| `XDPoS_getSigners` | [x] | genesis signers |
+| `XDPoS_getSignersAtHash` | [x] | genesis signers by hash |
+| `XDPoS_getMasternodesByNumber` | [x] | unsupported negative fixture |
+| `XDPoS_getLatestPoolStatus` | [x] | unsupported negative fixture |
+| `XDPoS_getV2BlockByHeader` | [x] | unsupported negative fixture |
+| `XDPoS_getV2BlockByNumber` | [x] | unsupported negative fixture |
+| `XDPoS_getV2BlockByHash` | [x] | unsupported negative fixture |
+| `XDPoS_networkInformation` | [x] | unsupported negative fixture |
+| `XDPoS_config` | [x] | unsupported negative fixture |
+| `XDPoS_getMissedRoundsInEpochByBlockNum` | [x] | unsupported negative fixture |
+| `XDPoS_getRewardByAccount` | [x] | unsupported negative fixture |
+| `XDPoS_getEpochNumbersBetween` | [x] | unsupported negative fixture |
+| `XDPoS_getBlockInfoByV2EpochNum` | [x] | unsupported negative fixture |
+| `XDPoS_calculateBlockInfoByV1EpochNum` | [x] | unsupported negative fixture |
+| `XDPoS_getBlockInfoByEpochNum` | [x] | unsupported negative fixture |
 
 ---
-
-## Next batch suggestions
-
-1. Add XDPoS namespace fixtures by enabling `XDPoS` in `clients/xdpos/xdpos.sh`.
-2. Add remaining admin/debug error fixtures (`admin_addPeer/removePeer`, `debug_getModifiedAccounts*`, `debug_storageRangeAt`, `debug_traceBlock*`).
-3. Add `eth_signTransaction` negative fixture.
 
 ## Running the suite
 
@@ -227,5 +221,13 @@ Current passing count: **133/133**
 Expected output:
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=160 failed=0
 ```
+
+## What changed recently
+
+- Enabled `XDPoS` namespace in `clients/xdpos/xdpos.sh`.
+- Added `admin_addPeer`, `admin_removePeer`.
+- Added `debug_getModifiedAccountsByHash`, `debug_getModifiedAccountsByNumber`, `debug_storageRangeAt`, `debug_traceBlock`, `debug_traceBlockByHash`, `debug_traceBlockByNumber`, `debug_traceBlockFromFile`.
+- Added `eth_signTransaction`.
+- Added `XDPoS_getSnapshot`, `XDPoS_getSnapshotAtHash`, `XDPoS_getSigners`, `XDPoS_getSignersAtHash` and unsupported XDPoS negative fixtures.

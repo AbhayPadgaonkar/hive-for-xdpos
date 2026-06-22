@@ -372,7 +372,7 @@ Run:
 Console output:
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=160 failed=0
 ```
 
 Tests cover:
@@ -391,12 +391,15 @@ Tests cover:
 - `rpc_modules`
 - `txpool_content`, `txpool_inspect`, `txpool_status`
 - `web3_clientVersion`, `web3_sha3`
-- `admin_peers`, `admin_datadir`, `admin_nodeInfo`, `admin_exportChain`, `admin_importChain`
+- `admin_peers`, `admin_datadir`, `admin_nodeInfo`, `admin_exportChain`, `admin_importChain`, `admin_addPeer`, `admin_removePeer`
 - `admin_addTrustedPeer`, `admin_removeTrustedPeer`, `admin_peerEvents` (unsupported on this XDC build)
 - `debug_dumpBlock`, `debug_getBadBlocks`, `debug_getBlockRlp`, `debug_printBlock`, `debug_chaindbProperty`, `debug_chaindbCompact`, `debug_preimage`, `debug_traceTransaction`
+- `debug_getModifiedAccountsByHash`, `debug_getModifiedAccountsByNumber`, `debug_storageRangeAt`, `debug_traceBlock`, `debug_traceBlockByHash`, `debug_traceBlockByNumber`, `debug_traceBlockFromFile`
 - `debug_accountRange` (unsupported on this XDC build)
 - `miner_setEtherbase`, `miner_setExtra`, `miner_setGasPrice`, `miner_start` (no signer error), `miner_stop`
+- `eth_signTransaction` (no account error)
 - XDPoS-specific: `eth_getCandidateStatus`, `eth_getMasternodes`, `eth_getMasternodeInfo`, `eth_getVoters`, `eth_getRewards`, `eth_getBlockFinality`
+- XDPoS namespace: `XDPoS_getSnapshot`, `XDPoS_getSnapshotAtHash`, `XDPoS_getSigners`, `XDPoS_getSignersAtHash`
 
 ---
 
@@ -545,7 +548,7 @@ Examples:
 | Geth + xdpos + xdc-gateway (smoke/genesis) | `finished suites=1 tests=18 failed=6` |
 | Geth + xdc-gateway (rpc-compat) | `finished suites=1 tests=454 failed=2` |
 | xdpos only (smoke/xdc) | `finished suites=1 tests=11 failed=0` |
-| xdpos only (xdc/rpc-compat) | `finished suites=1 tests=133 failed=0` |
+| xdpos only (xdc/rpc-compat) | `finished suites=1 tests=160 failed=0` |
 
 For the actual runs documented here:
 
@@ -553,9 +556,9 @@ For the actual runs documented here:
 simulation smoke/genesis finished suites=1 tests=18 failed=6
 simulation ethereum/rpc-compat finished suites=1 tests=454 failed=2
 simulation smoke/xdc finished suites=1 tests=11 failed=0
-simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
+simulation xdc/rpc-compat finished suites=1 tests=160 failed=0
 ```
 
 - `go-ethereum`: 6/6 smoke/genesis, 226/227 rpc-compat
 - `xdc-gateway`: 6/6 smoke/genesis, 226/227 rpc-compat
-- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 133/133 xdc/rpc-compat
+- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 160/160 xdc/rpc-compat

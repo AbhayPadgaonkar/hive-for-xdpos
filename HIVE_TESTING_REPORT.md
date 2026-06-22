@@ -13,7 +13,7 @@
 |--------|---------------|------------|----------------|-----------|-------|
 | `go-ethereum` | **6/6 passed** | **226/227 passed** | N/A | N/A | Standard Ethereum client; baseline. |
 | `xdc-gateway` | **6/6 passed** | **226/227 passed** | N/A | N/A | Geth upstream + JSON-RPC proxy. Engine API JWT auth fixed. |
-| `xdpos` | **0/6 passed** | N/A | **133/133 passed** | **11/11 passed** | XDC Core Node uses XDPoS consensus; standard Ethereum genesis/simulators are incompatible. Passes custom XDC test suites. |
+| `xdpos` | **0/6 passed** | N/A | **160/160 passed** | **11/11 passed** | XDC Core Node uses XDPoS consensus; standard Ethereum genesis/simulators are incompatible. Passes custom XDC test suites. |
 
 Final combined commands run:
 
@@ -353,12 +353,12 @@ Result:
 ```
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=160 failed=0
 ```
 
-**Status:** PASS (133/133)
+**Status:** PASS (160/160)
 
-Tests now cover 70+ JSON-RPC methods across admin, debug, eth, miner, net, txpool, and web3 namespaces. Fixtures exercise genesis state (all genesis balances, validator storage slots), block queries by number/hash/tag/uncle, raw transaction queries, filter lifecycle, negative cases (unknown accounts, invalid parameters, missing transactions, unsupported methods), and XDPoS-specific behavior.
+Tests now cover 80+ JSON-RPC methods across admin, debug, eth, miner, net, txpool, web3, and XDPoS namespaces. Fixtures exercise genesis state (all genesis balances, validator storage slots), block queries by number/hash/tag/uncle, raw transaction queries, filter lifecycle, XDPoS snapshot/signers, negative cases (unknown accounts, invalid parameters, missing transactions, unsupported methods), and XDPoS-specific behavior.
 - `eth_getBlockByNumber`, `eth_getBlockByHash` (genesis, earliest, full transactions, not found)
 - `eth_getUncleByBlockNumberAndIndex`, `eth_getUncleCountByBlockNumber`
 - `eth_getBalance` for every genesis account
@@ -367,6 +367,10 @@ Tests now cover 70+ JSON-RPC methods across admin, debug, eth, miner, net, txpoo
 - `eth_getBlockSignersByHash`, `eth_getBlockSignersByNumber`, `eth_getBlockFinalityByHash`, `eth_getBlockFinalityByNumber`, `eth_getRewardByHash`, `eth_getCandidateStatus`
 - `eth_newBlockFilter`, `eth_newFilter`, `eth_newPendingTransactionFilter`, `eth_getFilterChanges`, `eth_getFilterLogs`, `eth_uninstallFilter`
 - `eth_pendingTransactions`
+- `admin_addPeer`, `admin_removePeer`, `admin_exportChain`, `admin_importChain`
+- `debug_getModifiedAccountsByHash`, `debug_getModifiedAccountsByNumber`, `debug_storageRangeAt`, `debug_traceBlock`, `debug_traceBlockByHash`, `debug_traceBlockByNumber`, `debug_traceBlockFromFile`
+- `eth_signTransaction`
+- `XDPoS_getSnapshot`, `XDPoS_getSnapshotAtHash`, `XDPoS_getSigners`, `XDPoS_getSignersAtHash`
 - `eth_getBlockReceipts`, `eth_getProof`, `eth_getCompensation`, `txpool_contentFrom`, `personal_listAccounts`, `eth_chainId`, `eth_feeHistory`, `eth_blobBaseFee`, `eth_maxPriorityFeePerGas` (unsupported on this XDC build)
 - `eth_getTransactionByHash`, `eth_getTransactionReceipt` (not found)
 - `eth_getBlockTransactionCountByNumber`, `eth_getUncleCountByBlockNumber`
@@ -440,12 +444,12 @@ INF simulation smoke/xdc finished suites=1 tests=11 failed=0
 ```
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=160 failed=0
 ```
 
 | Client | Tests | Passed | Failed |
 |--------|-------|--------|--------|
-| xdpos | 102 | 102 | 0 |
+| `xdpos` | 160 | 160 | 0 |
 
 ---
 
@@ -561,7 +565,7 @@ This is expected because XDPoS is pre-merge and does not expose the Engine API.
 | `xdc-gateway` client added, smoke passing | **6/6** |
 | `xdc-gateway` rpc-compat passing | **226/227** |
 | `xdpos` client added, XDC-specific smoke passing | **11/11** |
-| `xdpos` client added, XDC RPC-compatibility passing | **133/133** |
+| `xdpos` client added, XDC RPC-compatibility passing | **160/160** |
 | `xdpos` standard Ethereum simulators | Incompatible by design (XDPoS genesis / no Engine API) |
 
 ---
