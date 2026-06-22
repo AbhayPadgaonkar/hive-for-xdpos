@@ -372,7 +372,7 @@ Run:
 Console output:
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=102 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
 ```
 
 Tests cover:
@@ -380,16 +380,22 @@ Tests cover:
 - `eth_accounts`, `eth_blockNumber`
 - `eth_getBalance` (all genesis accounts), `eth_getBlockByHash`, `eth_getBlockByNumber` (genesis, earliest, full transactions, not found), `eth_getCode`, `eth_getStorageAt` (validator slots 0x7-0xf), `eth_getTransactionCount`
 - `eth_getTransactionByHash`, `eth_getTransactionReceipt` (not found)
+- `eth_getRawTransactionByHash`, `eth_getRawTransactionByBlockHashAndIndex`, `eth_getRawTransactionByBlockNumberAndIndex`
 - `eth_getBlockTransactionCountByNumber`, `eth_getUncleCountByBlockNumber`, `eth_getUncleByBlockNumberAndIndex`, `eth_getUncleByBlockHashAndIndex`
-- `eth_getBlockReceipts`, `eth_getProof`, `eth_getCompensation`, `txpool_contentFrom`, `personal_listAccounts`, `eth_chainId`, `eth_feeHistory` (unsupported on this XDC build)
+- `eth_getBlockSignersByHash`, `eth_getBlockSignersByNumber`, `eth_getBlockFinalityByHash`, `eth_getBlockFinalityByNumber`, `eth_getRewardByHash`, `eth_getCandidateStatus`
+- `eth_newBlockFilter`, `eth_newFilter`, `eth_newPendingTransactionFilter`, `eth_getFilterChanges`, `eth_getFilterLogs`, `eth_uninstallFilter`
+- `eth_pendingTransactions`
+- `eth_getBlockReceipts`, `eth_getProof`, `eth_getCompensation`, `txpool_contentFrom`, `personal_listAccounts`, `eth_chainId`, `eth_feeHistory`, `eth_blobBaseFee`, `eth_maxPriorityFeePerGas` (unsupported on this XDC build)
 - `eth_syncing`
 - `net_listening`, `net_peerCount`, `net_version`
 - `rpc_modules`
 - `txpool_content`, `txpool_inspect`, `txpool_status`
 - `web3_clientVersion`, `web3_sha3`
-- `admin_peers`, `admin_datadir`, `admin_nodeInfo`
-- `debug_dumpBlock`, `debug_getBadBlocks`, `debug_getBlockRlp`, `debug_traceTransaction`
-- `miner_setEtherbase`, `miner_stop`
+- `admin_peers`, `admin_datadir`, `admin_nodeInfo`, `admin_exportChain`, `admin_importChain`
+- `admin_addTrustedPeer`, `admin_removeTrustedPeer`, `admin_peerEvents` (unsupported on this XDC build)
+- `debug_dumpBlock`, `debug_getBadBlocks`, `debug_getBlockRlp`, `debug_printBlock`, `debug_chaindbProperty`, `debug_chaindbCompact`, `debug_preimage`, `debug_traceTransaction`
+- `debug_accountRange` (unsupported on this XDC build)
+- `miner_setEtherbase`, `miner_setExtra`, `miner_setGasPrice`, `miner_start` (no signer error), `miner_stop`
 - XDPoS-specific: `eth_getCandidateStatus`, `eth_getMasternodes`, `eth_getMasternodeInfo`, `eth_getVoters`, `eth_getRewards`, `eth_getBlockFinality`
 
 ---
@@ -539,9 +545,7 @@ Examples:
 | Geth + xdpos + xdc-gateway (smoke/genesis) | `finished suites=1 tests=18 failed=6` |
 | Geth + xdc-gateway (rpc-compat) | `finished suites=1 tests=454 failed=2` |
 | xdpos only (smoke/xdc) | `finished suites=1 tests=11 failed=0` |
-| xdpos only (xdc/rpc-compat) | `finished suites=1 tests=27 failed=0` |
-
-The `failed=<N>` number is the most important one for your sir.
+| xdpos only (xdc/rpc-compat) | `finished suites=1 tests=133 failed=0` |
 
 For the actual runs documented here:
 
@@ -549,9 +553,9 @@ For the actual runs documented here:
 simulation smoke/genesis finished suites=1 tests=18 failed=6
 simulation ethereum/rpc-compat finished suites=1 tests=454 failed=2
 simulation smoke/xdc finished suites=1 tests=11 failed=0
-simulation xdc/rpc-compat finished suites=1 tests=27 failed=0
+simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
 ```
 
 - `go-ethereum`: 6/6 smoke/genesis, 226/227 rpc-compat
 - `xdc-gateway`: 6/6 smoke/genesis, 226/227 rpc-compat
-- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 102/102 xdc/rpc-compat
+- `xdpos`: 0/6 smoke/genesis (expected), 11/11 smoke/xdc, 133/133 xdc/rpc-compat

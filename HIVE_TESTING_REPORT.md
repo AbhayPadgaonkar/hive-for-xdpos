@@ -13,7 +13,7 @@
 |--------|---------------|------------|----------------|-----------|-------|
 | `go-ethereum` | **6/6 passed** | **226/227 passed** | N/A | N/A | Standard Ethereum client; baseline. |
 | `xdc-gateway` | **6/6 passed** | **226/227 passed** | N/A | N/A | Geth upstream + JSON-RPC proxy. Engine API JWT auth fixed. |
-| `xdpos` | **0/6 passed** | N/A | **102/102 passed** | **11/11 passed** | XDC Core Node uses XDPoS consensus; standard Ethereum genesis/simulators are incompatible. Passes custom XDC test suites. |
+| `xdpos` | **0/6 passed** | N/A | **133/133 passed** | **11/11 passed** | XDC Core Node uses XDPoS consensus; standard Ethereum genesis/simulators are incompatible. Passes custom XDC test suites. |
 
 Final combined commands run:
 
@@ -353,17 +353,21 @@ Result:
 ```
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=102 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
 ```
 
-**Status:** PASS (102/102)
+**Status:** PASS (133/133)
 
-Tests now cover 60+ JSON-RPC methods across admin, debug, eth, miner, net, txpool, and web3 namespaces. Fixtures exercise genesis state (all genesis balances, validator storage slots), block queries by number/hash/tag/uncle, negative cases (unknown accounts, invalid parameters, missing transactions, unsupported methods), and XDPoS-specific behavior.
+Tests now cover 70+ JSON-RPC methods across admin, debug, eth, miner, net, txpool, and web3 namespaces. Fixtures exercise genesis state (all genesis balances, validator storage slots), block queries by number/hash/tag/uncle, raw transaction queries, filter lifecycle, negative cases (unknown accounts, invalid parameters, missing transactions, unsupported methods), and XDPoS-specific behavior.
 - `eth_getBlockByNumber`, `eth_getBlockByHash` (genesis, earliest, full transactions, not found)
 - `eth_getUncleByBlockNumberAndIndex`, `eth_getUncleCountByBlockNumber`
 - `eth_getBalance` for every genesis account
 - `eth_getStorageAt` for validator contract slots 0x7-0xf
-- `eth_getBlockReceipts`, `eth_getProof`, `eth_getCompensation`, `txpool_contentFrom`, `personal_listAccounts`, `eth_chainId`, `eth_feeHistory` (unsupported on this XDC build)
+- `eth_getRawTransactionByHash`, `eth_getRawTransactionByBlockHashAndIndex`, `eth_getRawTransactionByBlockNumberAndIndex`
+- `eth_getBlockSignersByHash`, `eth_getBlockSignersByNumber`, `eth_getBlockFinalityByHash`, `eth_getBlockFinalityByNumber`, `eth_getRewardByHash`, `eth_getCandidateStatus`
+- `eth_newBlockFilter`, `eth_newFilter`, `eth_newPendingTransactionFilter`, `eth_getFilterChanges`, `eth_getFilterLogs`, `eth_uninstallFilter`
+- `eth_pendingTransactions`
+- `eth_getBlockReceipts`, `eth_getProof`, `eth_getCompensation`, `txpool_contentFrom`, `personal_listAccounts`, `eth_chainId`, `eth_feeHistory`, `eth_blobBaseFee`, `eth_maxPriorityFeePerGas` (unsupported on this XDC build)
 - `eth_getTransactionByHash`, `eth_getTransactionReceipt` (not found)
 - `eth_getBlockTransactionCountByNumber`, `eth_getUncleCountByBlockNumber`
 - `eth_syncing`
@@ -371,8 +375,11 @@ Tests now cover 60+ JSON-RPC methods across admin, debug, eth, miner, net, txpoo
 - `rpc_modules`
 - `txpool_content`, `txpool_inspect`, `txpool_status`
 - `web3_clientVersion`, `web3_sha3`
-- `admin_peers`, `debug_dumpBlock`, `debug_getBadBlocks`, `debug_getBlockRlp`
-- `miner_setEtherbase`, `miner_stop`
+- `admin_peers`, `admin_datadir`, `admin_nodeInfo`, `admin_exportChain`, `admin_importChain`
+- `admin_addTrustedPeer`, `admin_removeTrustedPeer`, `admin_peerEvents` (unsupported on this XDC build)
+- `debug_dumpBlock`, `debug_getBadBlocks`, `debug_getBlockRlp`, `debug_printBlock`, `debug_chaindbProperty`, `debug_chaindbCompact`, `debug_preimage`
+- `debug_accountRange` (unsupported on this XDC build)
+- `miner_setEtherbase`, `miner_setExtra`, `miner_setGasPrice`, `miner_start` (no signer error), `miner_stop`
 
 This suite uses the real XDC Apothem testnet genesis and validates stable RPC responses.
 
@@ -433,7 +440,7 @@ INF simulation smoke/xdc finished suites=1 tests=11 failed=0
 ```
 
 ```text
-INF simulation xdc/rpc-compat finished suites=1 tests=102 failed=0
+INF simulation xdc/rpc-compat finished suites=1 tests=133 failed=0
 ```
 
 | Client | Tests | Passed | Failed |
@@ -554,7 +561,7 @@ This is expected because XDPoS is pre-merge and does not expose the Engine API.
 | `xdc-gateway` client added, smoke passing | **6/6** |
 | `xdc-gateway` rpc-compat passing | **226/227** |
 | `xdpos` client added, XDC-specific smoke passing | **11/11** |
-| `xdpos` client added, XDC RPC-compatibility passing | **102/102** |
+| `xdpos` client added, XDC RPC-compatibility passing | **133/133** |
 | `xdpos` standard Ethereum simulators | Incompatible by design (XDPoS genesis / no Engine API) |
 
 ---
