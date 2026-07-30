@@ -8,12 +8,14 @@ import (
 	"math"
 	"net"
 	"net/http"
+	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/ethereum/hive/hivesim"
+	"github.com/gorilla/websocket"
 	"github.com/nsf/jsondiff"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
@@ -72,16 +74,38 @@ func runAllTests(t *hivesim.T, c *hivesim.Client, clientName string) {
 
 func runTest(t *hivesim.T, c *hivesim.Client, test *rpcTest) error {
 	var (
-		client    = &http.Client{Timeout: 5 * time.Second}
-		url       = fmt.Sprintf("http://%s", net.JoinHostPort(c.IP.String(), "8545"))
-		err       error
-		respBytes []byte
+		httpClient = &http.Client{Timeout: 5 * time.Second}
+		httpURL    = fmt.Sprintf("http://%s", net.JoinHostPort(c.IP.String(), "8545"))
+		wsURL      = url.URL{Scheme: "ws", Host: net.JoinHostPort(c.IP.String(), "8546")}
+		wsConn     *websocket.Conn
+		vars       = make(map[string]string)
+		err        error
+		respBytes  []byte
 	)
 
 	for _, msg := range test.messages {
 		if msg.send {
-			t.Log(">>", msg.data)
-			respBytes, err = postHTTP(client, url, strings.NewReader(msg.data))
+			data := substituteVars(msg.data, vars)
+			t.Log(">>", data)
+			if msg.ws {
+				if wsConn == nil {
+					dialer := websocket.Dialer{
+						HandshakeTimeout: 5 * time.Second,
+					}
+					// Match the Origin scheme to the WS URL so the underlying
+					// golang.org/x/net/websocket same-origin check passes.
+					headers := http.Header{}
+					headers.Set("Origin", fmt.Sprintf("ws://%s", wsURL.Host))
+					wsConn, _, err = dialer.Dial(wsURL.String(), headers)
+					if err != nil {
+						return fmt.Errorf("websocket dial error: %v", err)
+					}
+					defer wsConn.Close()
+				}
+				respBytes, err = postWS(wsConn, strings.NewReader(data))
+			} else {
+				respBytes, err = postHTTP(httpClient, httpURL, strings.NewReader(data))
+			}
 			if err != nil {
 				return err
 			}
@@ -89,19 +113,23 @@ func runTest(t *hivesim.T, c *hivesim.Client, test *rpcTest) error {
 			if respBytes == nil {
 				return fmt.Errorf("invalid test, response before request")
 			}
-			expectedData := msg.data
+			expectedData := substituteVars(msg.data, vars)
 			resp := string(bytes.TrimSpace(respBytes))
 			t.Log("<<", resp)
 			if !gjson.Valid(resp) {
 				return fmt.Errorf("invalid JSON response")
 			}
 
+			expectedData, err = applyCaptures(expectedData, resp, vars)
+			if err != nil {
+				return fmt.Errorf("failed to apply captures: %v", err)
+			}
+
 			// Remove error message strings from comparison when both sides error.
 			var errorRedacted bool
 			resp, expectedData, errorRedacted = redactErrorMessages(resp, expectedData)
 
-			// Ignore response fields not present in the expected payload, allowing
-			// fixtures to assert only the subset of fields they care about.
+			// Ignore response fields not present in the expected payload.
 			resp, err = filterToExpected(resp, expectedData)
 			if err != nil {
 				return fmt.Errorf("failed to filter response: %v", err)
@@ -263,4 +291,97 @@ func postHTTP(c *http.Client, url string, d io.Reader) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 	return io.ReadAll(resp.Body)
+}
+
+func postWS(conn *websocket.Conn, d io.Reader) ([]byte, error) {
+	payload, err := io.ReadAll(d)
+	if err != nil {
+		return nil, fmt.Errorf("error reading request body: %v", err)
+	}
+	if err := conn.WriteMessage(websocket.TextMessage, payload); err != nil {
+		return nil, fmt.Errorf("websocket write error: %v", err)
+	}
+	conn.SetReadDeadline(time.Now().Add(5 * time.Second))
+	_, data, err := conn.ReadMessage()
+	if err != nil {
+		return nil, fmt.Errorf("websocket read error: %v", err)
+	}
+	return data, nil
+}
+
+var varPlaceholder = regexp.MustCompile(`\{\{var:([a-zA-Z0-9_]+)\}\}`)
+var capturePlaceholder = regexp.MustCompile(`^\{\{capture:([a-zA-Z0-9_]+)\}\}$`)
+
+func substituteVars(data string, vars map[string]string) string {
+	return varPlaceholder.ReplaceAllStringFunc(data, func(match string) string {
+		name := varPlaceholder.FindStringSubmatch(match)[1]
+		if v, ok := vars[name]; ok {
+			return v
+		}
+		return match
+	})
+}
+
+func applyCaptures(expected, actual string, vars map[string]string) (string, error) {
+	return applyCaptureValue(expected, actual, vars)
+}
+
+func applyCaptureValue(expected, actual string, vars map[string]string) (string, error) {
+	e := gjson.Parse(expected)
+	r := gjson.Parse(actual)
+
+	switch {
+	case e.IsObject() && r.IsObject():
+		out := "{}"
+		var err error
+		e.ForEach(func(key, expVal gjson.Result) bool {
+			k := key.String()
+			respChild := r.Get(k)
+			if !respChild.Exists() {
+				return true
+			}
+			filtered, fErr := applyCaptureValue(expVal.Raw, respChild.Raw, vars)
+			if fErr != nil {
+				err = fErr
+				return false
+			}
+			out, fErr = sjson.SetRaw(out, k, filtered)
+			if fErr != nil {
+				err = fErr
+				return false
+			}
+			return true
+		})
+		return out, err
+
+	case e.IsArray() && r.IsArray():
+		var items []string
+		i := 0
+		var err error
+		e.ForEach(func(_, expVal gjson.Result) bool {
+			idx := strconv.Itoa(i)
+			i++
+			respItem := r.Get(idx)
+			if !respItem.Exists() {
+				return true
+			}
+			filtered, fErr := applyCaptureValue(expVal.Raw, respItem.Raw, vars)
+			if fErr != nil {
+				err = fErr
+				return false
+			}
+			items = append(items, filtered)
+			return true
+		})
+		return "[" + strings.Join(items, ",") + "]", err
+
+	default:
+		if e.Type == gjson.String {
+			if m := capturePlaceholder.FindStringSubmatch(e.Str); m != nil {
+				vars[m[1]] = r.String()
+				return r.Raw, nil
+			}
+		}
+		return expected, nil
+	}
 }

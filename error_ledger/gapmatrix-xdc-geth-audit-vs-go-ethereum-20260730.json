@@ -1,0 +1,987 @@
+﻿{
+    "date":  "2026-07-30",
+    "client_a":  "xdc-geth-audit",
+    "client_b":  "go-ethereum",
+    "version_a":  "XDC/v1.17.4-xdc.7-f7818de6-20260728/linux-amd64/go1.26.5",
+    "version_b":  "Geth/v1.17.6-unstable-b988c00b-20260729/linux-amd64/go1.26.5",
+    "modules_a":  {
+                      "XDPoS":  "1.0",
+                      "admin":  "1.0",
+                      "debug":  "1.0",
+                      "eth":  "1.0",
+                      "miner":  "1.0",
+                      "net":  "1.0",
+                      "rpc":  "1.0",
+                      "txpool":  "1.0",
+                      "web3":  "1.0"
+                  },
+    "modules_b":  {
+                      "admin":  "1.0",
+                      "debug":  "1.0",
+                      "eth":  "1.0",
+                      "miner":  "1.0",
+                      "net":  "1.0",
+                      "rpc":  "1.0",
+                      "testing":  "1.0",
+                      "txpool":  "1.0",
+                      "web3":  "1.0"
+                  },
+    "total_methods":  134,
+    "both_supported":  24,
+    "both_unsupported":  102,
+    "in_a_not_b":  8,
+    "in_b_not_a":  0,
+    "gaps_a_not_b":  [
+                         "XDPoS_getEpochNumbersBetween",
+                         "XDPoS_getLatestPoolStatus",
+                         "XDPoS_getMasternodesByNumber",
+                         "XDPoS_getMissedRoundsInEpochByBlockNum",
+                         "XDPoS_getSigners",
+                         "XDPoS_getSnapshot",
+                         "XDPoS_getV2BlockByNumber",
+                         "XDPoS_networkInformation"
+                     ],
+    "gaps_b_not_a":  [
+
+                     ],
+    "matrix":  [
+                   {
+                       "method":  "admin_addPeer",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "admin_addTrustedPeer",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "admin_datadir",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "admin_exportChain",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "admin_importChain",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "admin_nodeInfo",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "admin_peerEvents",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method admin_peerEvents does not exist/is not available",
+                       "b_error":  "the method admin_peerEvents does not exist/is not available"
+                   },
+                   {
+                       "method":  "admin_peers",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "admin_removePeer",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "admin_removeTrustedPeer",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_accountRange",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_chaindbCompact",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "debug_chaindbProperty",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "debug_dumpBlock",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_getBadBlocks",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "debug_getBlockRlp",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method debug_getBlockRlp does not exist/is not available",
+                       "b_error":  "the method debug_getBlockRlp does not exist/is not available"
+                   },
+                   {
+                       "method":  "debug_getModifiedAccountsByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_getModifiedAccountsByNumber",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_preimage",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_printBlock",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_storageRangeAt",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_traceBlock",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_traceBlockByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_traceBlockByNumber",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_traceBlockFromFile",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "debug_traceTransaction",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "engine_exchangeTransitionConfigurationV1",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_exchangeTransitionConfigurationV1 does not exist/is not available",
+                       "b_error":  "the method engine_exchangeTransitionConfigurationV1 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_forkchoiceUpdatedV1",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_forkchoiceUpdatedV1 does not exist/is not available",
+                       "b_error":  "the method engine_forkchoiceUpdatedV1 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_forkchoiceUpdatedV2",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_forkchoiceUpdatedV2 does not exist/is not available",
+                       "b_error":  "the method engine_forkchoiceUpdatedV2 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_forkchoiceUpdatedV3",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_forkchoiceUpdatedV3 does not exist/is not available",
+                       "b_error":  "the method engine_forkchoiceUpdatedV3 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_getPayloadV1",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_getPayloadV1 does not exist/is not available",
+                       "b_error":  "the method engine_getPayloadV1 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_getPayloadV2",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_getPayloadV2 does not exist/is not available",
+                       "b_error":  "the method engine_getPayloadV2 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_getPayloadV3",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_getPayloadV3 does not exist/is not available",
+                       "b_error":  "the method engine_getPayloadV3 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_newPayloadV1",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_newPayloadV1 does not exist/is not available",
+                       "b_error":  "the method engine_newPayloadV1 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_newPayloadV2",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_newPayloadV2 does not exist/is not available",
+                       "b_error":  "the method engine_newPayloadV2 does not exist/is not available"
+                   },
+                   {
+                       "method":  "engine_newPayloadV3",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method engine_newPayloadV3 does not exist/is not available",
+                       "b_error":  "the method engine_newPayloadV3 does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_accounts",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_blobBaseFee",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_blockNumber",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_call",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_chainId",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_coinbase",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_coinbase does not exist/is not available",
+                       "b_error":  "the method eth_coinbase does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_createAccessList",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_estimateGas",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_feeHistory",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_gasPrice",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_getBalance",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getBlockByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getBlockByNumber",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getBlockFinality",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_getBlockFinality does not exist/is not available",
+                       "b_error":  "the method eth_getBlockFinality does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getBlockFinalityByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method eth_getBlockFinalityByHash does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getBlockFinalityByNumber",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method eth_getBlockFinalityByNumber does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getBlockReceipts",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getBlockSignersByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method eth_getBlockSignersByHash does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getBlockSignersByNumber",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method eth_getBlockSignersByNumber does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getBlockTransactionCountByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getBlockTransactionCountByNumber",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getCandidateStatus",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method eth_getCandidateStatus does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getCode",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getCompensation",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_getCompensation does not exist/is not available",
+                       "b_error":  "the method eth_getCompensation does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getFilterChanges",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getFilterLogs",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getLogs",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getMasternodeInfo",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_getMasternodeInfo does not exist/is not available",
+                       "b_error":  "the method eth_getMasternodeInfo does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getMasternodes",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "method handler crashed",
+                       "b_error":  "the method eth_getMasternodes does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getProof",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getRawTransactionByBlockHashAndIndex",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getRawTransactionByBlockNumberAndIndex",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getRawTransactionByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getRewardByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method eth_getRewardByHash does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getRewards",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_getRewards does not exist/is not available",
+                       "b_error":  "the method eth_getRewards does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getStorageAt",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getTransactionByBlockHashAndIndex",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getTransactionByBlockNumberAndIndex",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getTransactionByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getTransactionCount",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getTransactionReceipt",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getUncleByBlockHashAndIndex",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getUncleByBlockNumberAndIndex",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getUncleCountByBlockHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getUncleCountByBlockNumber",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_getVoters",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_getVoters does not exist/is not available",
+                       "b_error":  "the method eth_getVoters does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_getWork",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_getWork does not exist/is not available",
+                       "b_error":  "the method eth_getWork does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_hashrate",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_hashrate does not exist/is not available",
+                       "b_error":  "the method eth_hashrate does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_maxPriorityFeePerGas",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_mining",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_mining does not exist/is not available",
+                       "b_error":  "the method eth_mining does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_newBlockFilter",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_newFilter",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_newPendingTransactionFilter",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_pendingTransactions",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_protocolVersion",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_protocolVersion does not exist/is not available",
+                       "b_error":  "the method eth_protocolVersion does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_sendRawTransaction",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_sendTransaction",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_sign",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_signTransaction",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "eth_submitHashrate",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_submitHashrate does not exist/is not available",
+                       "b_error":  "the method eth_submitHashrate does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_submitWork",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method eth_submitWork does not exist/is not available",
+                       "b_error":  "the method eth_submitWork does not exist/is not available"
+                   },
+                   {
+                       "method":  "eth_syncing",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "eth_uninstallFilter",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "miner_setEtherbase",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method miner_setEtherbase does not exist/is not available",
+                       "b_error":  "the method miner_setEtherbase does not exist/is not available"
+                   },
+                   {
+                       "method":  "miner_setExtra",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "miner_setGasPrice",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "miner_start",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method miner_start does not exist/is not available",
+                       "b_error":  "the method miner_start does not exist/is not available"
+                   },
+                   {
+                       "method":  "miner_stop",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method miner_stop does not exist/is not available",
+                       "b_error":  "the method miner_stop does not exist/is not available"
+                   },
+                   {
+                       "method":  "net_listening",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "net_peerCount",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "net_version",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "personal_importRawKey",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method personal_importRawKey does not exist/is not available",
+                       "b_error":  "the method personal_importRawKey does not exist/is not available"
+                   },
+                   {
+                       "method":  "personal_listAccounts",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method personal_listAccounts does not exist/is not available",
+                       "b_error":  "the method personal_listAccounts does not exist/is not available"
+                   },
+                   {
+                       "method":  "personal_unlockAccount",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method personal_unlockAccount does not exist/is not available",
+                       "b_error":  "the method personal_unlockAccount does not exist/is not available"
+                   },
+                   {
+                       "method":  "rpc_modules",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "txpool_content",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "txpool_contentFrom",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "txpool_inspect",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "txpool_status",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "web3_clientVersion",
+                       "a_supported":  true,
+                       "b_supported":  true,
+                       "a_error":  "",
+                       "b_error":  ""
+                   },
+                   {
+                       "method":  "web3_sha3",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "missing value for required argument 0"
+                   },
+                   {
+                       "method":  "XDPoS_calculateBlockInfoByV1EpochNum",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method XDPoS_calculateBlockInfoByV1EpochNum does not exist/is not available",
+                       "b_error":  "the method XDPoS_calculateBlockInfoByV1EpochNum does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_config",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method XDPoS_config does not exist/is not available",
+                       "b_error":  "the method XDPoS_config does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getBlockInfoByEpochNum",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method XDPoS_getBlockInfoByEpochNum does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getBlockInfoByV2EpochNum",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "the method XDPoS_getBlockInfoByV2EpochNum does not exist/is not available",
+                       "b_error":  "the method XDPoS_getBlockInfoByV2EpochNum does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getEpochNumbersBetween",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_getEpochNumbersBetween does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getLatestPoolStatus",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_getLatestPoolStatus does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getMasternodesByNumber",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_getMasternodesByNumber does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getMissedRoundsInEpochByBlockNum",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_getMissedRoundsInEpochByBlockNum does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getRewardByAccount",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method XDPoS_getRewardByAccount does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getSigners",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_getSigners does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getSignersAtHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method XDPoS_getSignersAtHash does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getSnapshot",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_getSnapshot does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getSnapshotAtHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method XDPoS_getSnapshotAtHash does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getV2BlockByHash",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 0",
+                       "b_error":  "the method XDPoS_getV2BlockByHash does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getV2BlockByHeader",
+                       "a_supported":  false,
+                       "b_supported":  false,
+                       "a_error":  "missing value for required argument 1",
+                       "b_error":  "the method XDPoS_getV2BlockByHeader does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_getV2BlockByNumber",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_getV2BlockByNumber does not exist/is not available"
+                   },
+                   {
+                       "method":  "XDPoS_networkInformation",
+                       "a_supported":  true,
+                       "b_supported":  false,
+                       "a_error":  "",
+                       "b_error":  "the method XDPoS_networkInformation does not exist/is not available"
+                   }
+               ]
+}

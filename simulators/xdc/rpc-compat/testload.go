@@ -22,6 +22,7 @@ type rpcTest struct {
 type rpcTestMessage struct {
 	data string
 	send bool
+	ws   bool
 }
 
 func loadTestFile(name string, r io.Reader) (rpcTest, error) {
@@ -44,6 +45,17 @@ func loadTestFile(name string, r io.Reader) (rpcTest, error) {
 			}
 			text := strings.TrimPrefix(strings.TrimPrefix(line, "//"), " ")
 			test.comment += text + "\n"
+		case strings.HasPrefix(line, ">>ws") || strings.HasPrefix(line, "<<ws"):
+			inHeader = false
+			data := strings.TrimSpace(line[4:])
+			if !gjson.Valid(data) {
+				return test, fmt.Errorf("invalid JSON in line %q", line)
+			}
+			test.messages = append(test.messages, rpcTestMessage{
+				data: data,
+				send: strings.HasPrefix(line, ">>ws"),
+				ws:   true,
+			})
 		case strings.HasPrefix(line, ">>") || strings.HasPrefix(line, "<<"):
 			inHeader = false
 			data := strings.TrimSpace(line[2:])

@@ -20,3 +20,17 @@ __pycache__/
 simulators/**/target
 hivesim-rs/Cargo.lock
 hivesim-rs/target
+
+# build output
+*.exe
+*.exe~
+
+# embedded repo (private, built from local source)
+clients/xdc-geth-audit/xdc-geth-audit/
+
+# generated data files
+hive.db
+
+# generated build artifacts
+frontend/.next/
+backend/hive-api.exe

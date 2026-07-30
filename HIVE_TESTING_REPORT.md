@@ -14,6 +14,7 @@
 | `go-ethereum` | **6/6 passed** | **226/227 passed** | N/A | N/A | Standard Ethereum client; baseline. |
 | `xdc-gateway` | **6/6 passed** | **226/227 passed** | N/A | N/A | Geth upstream + JSON-RPC proxy. Engine API JWT auth fixed. |
 | `xdpos` | **0/6 passed** | N/A | **160/160 passed** | **11/11 passed** | XDC Core Node uses XDPoS consensus; standard Ethereum genesis/simulators are incompatible. Passes custom XDC test suites. |
+| `xdc-geth-audit` | N/A | N/A | **134/160 passed** (26 failed) | N/A | XDC go-ethereum audit fork; 26 regressions vs xdpos baseline. See §13. |
 
 Final combined commands run:
 
@@ -447,9 +448,18 @@ INF simulation smoke/xdc finished suites=1 tests=11 failed=0
 INF simulation xdc/rpc-compat finished suites=1 tests=160 failed=0
 ```
 
+```powershell
+.\hive --% -sim xdc/rpc-compat -client xdc-geth-audit
+```
+
+```text
+INF simulation xdc/rpc-compat finished suites=1 tests=160 failed=26
+```
+
 | Client | Tests | Passed | Failed |
 |--------|-------|--------|--------|
 | `xdpos` | 160 | 160 | 0 |
+| `xdc-geth-audit` | 160 | 134 | 26 |
 
 ---
 
@@ -472,6 +482,10 @@ INF simulation xdc/rpc-compat finished suites=1 tests=160 failed=0
 6. Run XDC-specific smoke test:
    ```powershell
    .\hive --% -sim smoke/xdc -client xdpos
+   ```
+7. Run XDC RPC-compat against xdc-geth-audit:
+   ```powershell
+   .\hive --% -sim xdc/rpc-compat -client xdc-geth-audit
    ```
 
 ---
@@ -567,6 +581,84 @@ This is expected because XDPoS is pre-merge and does not expose the Engine API.
 | `xdpos` client added, XDC-specific smoke passing | **11/11** |
 | `xdpos` client added, XDC RPC-compatibility passing | **160/160** |
 | `xdpos` standard Ethereum simulators | Incompatible by design (XDPoS genesis / no Engine API) |
+| `xdc-geth-audit` client added, XDC RPC-compatibility run | **134/160** (26 failures, see §13) |
+
+---
+
+## 13. Client: xdc-geth-audit (New)
+
+### 13.1 What it is
+
+A new Hive client wrapping the XDC go-ethereum audit fork (`C:\BlocksScan\xdc-geth-audit`). Built from local source at `clients/xdc-geth-audit/`. Uses XDPoS V2 consensus engine, modern go-ethereum flag style (`--http`, `--ws`), and Apothem testnet genesis.
+
+### 13.2 Files added
+
+```text
+clients/xdc-geth-audit/
+├── Dockerfile           # 2-stage build: golang:1.26-alpine -> alpine
+├── hive.yaml            # declares eth1 role
+├── geth.sh              # entry point (--apothem + --http/--ws)
+├── enode.sh             # enode retriever
+├── xdc-geth-audit/      # local source copy of C:\BlocksScan\xdc-geth-audit
+└── .dockerignore        # excludes .git, *.md, docs/
+```
+
+### 13.3 XDC RPC-compatibility
+
+```powershell
+.\hive --% -sim xdc/rpc-compat -client xdc-geth-audit
+```
+
+| Metric | Value |
+|--------|-------|
+| Total  | 160 |
+| Passed | 134 |
+| Failed | 26 |
+
+**Failures by category:**
+
+| Category | Count | Tests |
+|----------|-------|-------|
+| Block format (`miner` prefix, missing fields) | 6 | `eth_getBlockByHash` (2), `eth_getBlockByNumber` (4) |
+| Block finality/signers | 4 | `eth_getBlockFinalityByHash`, `eth_getBlockFinalityByNumber`, `eth_getBlockSignersByHash`, `eth_getBlockSignersByNumber` |
+| XDPoS methods | 5 | `getBlockInfoByEpochNum`, `getRewardByAccount`, `getSigners`, `getSignersAtHash`, `getV2BlockByHeader` |
+| Gas/fee | 2 | `eth_gasPrice`, `eth_feeHistory` |
+| Error code mismatches | 5 | `eth_getWork`, `eth_sendTransaction`, `miner_start`, `XDPoS_getBlockInfoByEpochNum`, `debug_accountRange` |
+| Response shape mismatches | 3 | `eth_syncing`, `eth_getCandidateStatus`, `admin_nodeInfo` |
+| Version/net mismatch | 2 | `web3_clientVersion`, `net_version` |
+
+**Root causes:**
+
+1. **Block `miner` address uses `0x` prefix** instead of `xdc` prefix. The audit fork inherits Geth's standard address formatting and does not apply the XDC address remapping. XDC-specific fields (`penalties`, `validator`, `validators`, `totalDifficulty`) are absent from the block response.
+
+2. **Network ID returns `"89"** instead of `"51"`. The audit fork defaults to network 89 (UAE testnet) rather than Apothem (51). The `--apothem` flag is being used but the embedded genesis may differ.
+
+3. **Gas price returns 1 Gwei** (`0xf4240`) instead of the XDC mainnet 18 Gwei (`0x430e23400`). The audit fork uses the default Geth minimum gas price.
+
+4. **`eth_syncing` returns a sync progress object** instead of `false`. The audit fork's Geth version exposes snapshot sync state even when not syncing.
+
+5. **Error codes differ** for several "method not found" / "unsupported" cases. The xdpos baseline returns `-32000` in some cases where the audit fork returns `-32601` (or vice versa).
+
+6. **`eth_feeHistory` fails** at genesis because no block has been produced yet (head 0, requested block 1).
+
+7. **`net_version` returns `"89"`** (UAE testnet ID) — the genesis supplied by the simulator uses chainId 51 but the client's net_version returns a different default.
+
+### 13.4 Detailed Failure Reference
+
+Per-test diffs are recorded in `error_ledger/xdc-geth-audit-20260729.json`. Key diffs:
+
+| Test | Client | Expected | Root Cause |
+|------|--------|----------|------------|
+| `eth_getBlockByHash/get-genesis` | `miner: "0x0000..."` | `miner: "xdc0000..."` | Address format; missing XDC fields |
+| `eth_gasPrice` | `"0xf4240"` | `"0x430e23400"` | Default Geth min gas price |
+| `net_version` | `"89"` | `"51"` | Wrong network ID default |
+| `eth_syncing` | Sync object | `false` | Geth snapshot sync state |
+| `eth_sendTransaction` | `-32000` | `-32600` | Error code mismatch |
+| `eth_getWork` | `-32601` | `-32000` | Method not found vs internal error |
+| `miner_start` | `-32601` | `-32000` | Method removed vs no signer |
+| `eth_getBlockFinalityByHash` | `33` | `0` | Finality value changed |
+| `eth_getBlockSignersByHash` | `["0x0000..."]` | `[]` | Empty vs zero-address |
+| `web3_clientVersion` | `"XDC/v1.17.4..."` | `"XDC/v1.0.0..."` | Version string diff |
 
 ---
 
@@ -577,3 +669,10 @@ This is expected because XDPoS is pre-merge and does not expose the Engine API.
 3. **~~Run `ethereum/rpc-compat` again~~** — Done; both go-ethereum and xdc-gateway score 226/227.
 4. **Update `HIVE_LOG_GUIDE.md`** with the resolved Engine API pattern and the new `smoke/xdc` simulator.
 5. **Consider an XDPoS-specific sync/consensus simulator** if deeper XDC coverage is required.
+6. **Investigate xdc-geth-audit regressions** — 26 failures against xdpos baseline. Key categories:
+   - Block format: `miner` address uses `0x` prefix (not `xdc`), missing XDC fields (`penalties`, `validator`, `validators`, `totalDifficulty`).
+   - Network ID: returns `"89"` (UAE testnet) instead of `"51"` (Apothem).
+   - Gas price: returns 1 Gwei default instead of 18 Gwei.
+   - Syncing: returns snapshot sync progress object instead of `false`.
+   - Error code mismatches across multiple methods.
+7. **Update fixtures** to match audit fork response format, or backport the missing XDC fields into the audit source.

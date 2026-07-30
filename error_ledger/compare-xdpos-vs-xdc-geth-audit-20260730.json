@@ -1,0 +1,984 @@
+﻿{
+    "comparison":  "xdpos vs xdc-geth-audit",
+    "simulator":  "xdc/rpc-compat",
+    "date":  "2026-07-30",
+    "both_pass":  134,
+    "a_only":  26,
+    "b_only":  0,
+    "both_fail":  0,
+    "total_matched":  160,
+    "client_a":  {
+                     "name":  "xdpos",
+                     "total":  160,
+                     "passed":  160,
+                     "failed":  0
+                 },
+    "client_b":  {
+                     "name":  "xdc-geth-audit",
+                     "total":  160,
+                     "passed":  134,
+                     "failed":  26
+                 },
+    "tests":  [
+                  {
+                      "name":  "admin_addPeer/add-peer (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_addTrustedPeer/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_datadir/get-datadir (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_exportChain/export-chain (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_importChain/import-chain (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_nodeInfo/get-node-info (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "admin_peerEvents/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_peers/get-peers (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_removePeer/remove-peer (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "admin_removeTrustedPeer/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "client launch (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_accountRange/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "debug_chaindbCompact/compact (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_chaindbProperty/get-stats (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_dumpBlock/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_getBadBlocks/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_getBlockRlp/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_getModifiedAccountsByHash/genesis-error (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_getModifiedAccountsByNumber/genesis-error (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_preimage/missing-preimage (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_printBlock/print-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_storageRangeAt/genesis-error (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_traceBlock/genesis-error (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_traceBlockByHash/genesis-error (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_traceBlockByNumber/genesis-error (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_traceBlockFromFile/missing-file (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "debug_traceTransaction/trace-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_accounts/get-accounts (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_blobBaseFee/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_blockNumber/get-block-number (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_call/call-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_chainId/get-chain-id (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_coinbase/get-coinbase (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_estimateGas/simple-transfer (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_feeHistory/fee-history (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_gasPrice/get-gas-price (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-earliest-foundation (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-earliest-genesis-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-foundation-wallet (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-genesis-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-03c0 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-38b2 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-42e6 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-4398 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-4e37 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-664c (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-7aa1 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-9a37 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-latest-validator (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/get-unknown-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBalance/invalid-address (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBlockByHash/get-full-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockByHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockByHash/get-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBlockByNumber/get-earliest (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockByNumber/get-full-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockByNumber/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockByNumber/get-latest (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockByNumber/get-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBlockFinality/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBlockFinalityByHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockFinalityByNumber/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockReceipts/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBlockSignersByHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockSignersByNumber/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getBlockTransactionCountByHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBlockTransactionCountByHash/get-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getBlockTransactionCountByNumber/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getCandidateStatus/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_getCode/get-empty-at-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getCode/get-unknown-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getCompensation/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getFilterChanges/empty-changes (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getFilterLogs/empty-logs (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getLogs/get-genesis-range (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getLogs/invalid-filter (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getMasternodeInfo/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getMasternodes/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getProof/get-genesis-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getRawTransactionByBlockHashAndIndex/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getRawTransactionByBlockNumberAndIndex/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getRawTransactionByHash/get-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getRewardByHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getRewards/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-unknown-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-7 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-8 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-9 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-a (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-b (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-c (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-d (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-e (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/get-validator-slot-f (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getStorageAt/invalid-key (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getTransactionByBlockHashAndIndex/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getTransactionByBlockNumberAndIndex/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getTransactionByHash/get-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getTransactionCount/get-genesis-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getTransactionCount/get-unknown-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getTransactionCount/get-validator (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getTransactionReceipt/get-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getUncleByBlockHashAndIndex/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getUncleByBlockNumberAndIndex/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getUncleCountByBlockHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getUncleCountByBlockHash/get-notfound (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getUncleCountByBlockNumber/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getVoters/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_getWork/get-work (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_hashrate/get-hashrate (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_maxPriorityFeePerGas/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_mining/check-mining (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_newBlockFilter/new-filter (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_newFilter/new-filter (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_newPendingTransactionFilter/new-filter (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_pendingTransactions/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_protocolVersion/get-version (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_sendRawTransaction/invalid-tx (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_sendTransaction/send-no-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_sign/sign-no-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_signTransaction/no-account (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_submitHashrate/submit-hashrate (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_submitWork/submit-work (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "eth_syncing/check-syncing (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "eth_uninstallFilter/uninstall (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "miner_setEtherbase/set-etherbase (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "miner_setExtra/set-extra (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "miner_setGasPrice/set-gas-price (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "miner_start/no-signer (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "miner_stop/stop-miner (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "net_listening/check-listening (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "net_peerCount/get-peer-count (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "net_version/get-network-id (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "personal_listAccounts/list-accounts (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "rpc_modules/get-modules (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "txpool_content/get-content (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "txpool_contentFrom/get-empty (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "txpool_contentFrom/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "txpool_inspect/get-inspect (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "txpool_status/get-status (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "web3_clientVersion/get-client-version (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "web3_sha3/get-sha3 (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_calculateBlockInfoByV1EpochNum/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_config/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getBlockInfoByEpochNum/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "XDPoS_getBlockInfoByV2EpochNum/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getEpochNumbersBetween/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getLatestPoolStatus/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getMasternodesByNumber/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getMissedRoundsInEpochByBlockNum/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getRewardByAccount/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "XDPoS_getSigners/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "XDPoS_getSignersAtHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "XDPoS_getSnapshot/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getSnapshotAtHash/get-genesis (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getV2BlockByHash/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_getV2BlockByHeader/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  false,
+                      "status":  "A_ONLY"
+                  },
+                  {
+                      "name":  "XDPoS_getV2BlockByNumber/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  },
+                  {
+                      "name":  "XDPoS_networkInformation/unsupported (xdc-geth-audit)",
+                      "a_pass":  true,
+                      "b_pass":  true,
+                      "status":  "BOTH_PASS"
+                  }
+              ]
+}

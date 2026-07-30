@@ -1,0 +1,286 @@
+{
+  "client": "xdc-geth-audit",
+  "date": "2026-07-29",
+  "run_timestamp": "2026-07-29T23:15:00Z",
+  "suite": "xdc/rpc-compat",
+  "command": ".\\hive.exe --sim xdc/rpc-compat --client xdc-geth-audit",
+  "build_info": {
+    "version_tag": "XDC/v1.17.4-xdc.7-f7818de6-20260728/linux-amd64/go1.26.5",
+    "source_repo": "C:\\BlocksScan\\xdc-geth-audit",
+    "docker_image": "hive/clients/xdc-geth-audit:latest"
+  },
+  "results": {
+    "suites": 1,
+    "tests_total": 160,
+    "passed": 134,
+    "failed": 26
+  },
+  "baseline": {
+    "client": "xdpos",
+    "passed": 160,
+    "failed": 0,
+    "date": "2026-06-17",
+    "note": "Previous xdpos baseline achieved 160/160 against the same simulator"
+  },
+  "failures": [
+    {
+      "test_id": 4,
+      "name": "XDPoS_getBlockInfoByEpochNum/unsupported",
+      "category": "XDPoS",
+      "client_response": "error code -32602 (invalid argument)",
+      "expected": "error code -32601 (method not found)",
+      "diff": "error code mismatch: client -32602 vs expected -32601",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 10,
+      "name": "XDPoS_getRewardByAccount/unsupported",
+      "category": "XDPoS",
+      "client_response": "error -32000: StoreRewardFolder not configured; start node with --store-reward-folder to enable reward history",
+      "expected": "error code -32601 (method not found)",
+      "diff": "client exposes the method but requires --store-reward-folder flag",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 11,
+      "name": "XDPoS_getSigners/get-genesis",
+      "category": "XDPoS",
+      "client_response": "returns signer addresses list",
+      "expected": "returns signer addresses list",
+      "diff": "signer address list differs between xdpos and xdc-geth-audit (different epoch/masternode set in the real chain)",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 12,
+      "name": "XDPoS_getSignersAtHash/get-genesis",
+      "category": "XDPoS",
+      "client_response": "returns signer addresses list",
+      "expected": "returns signer addresses list",
+      "diff": "same as getSigners - signer list mismatch",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 16,
+      "name": "XDPoS_getV2BlockByHeader/unsupported",
+      "category": "XDPoS",
+      "client_response": "error -32602: invalid argument 0: json: cannot unmarshal string into Go value of type types.Header",
+      "expected": "error code -32601 (method not found)",
+      "diff": "error code/type mismatch",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 24,
+      "name": "admin_nodeInfo/get-node-info",
+      "category": "Admin",
+      "client_response": "full node info object with XDC-specific chain config and trusted checkpoints",
+      "expected": "node info object",
+      "diff": "client returns extra fields (XDPoS config, trusted checkpoints, snap protocol) not present in fixture",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 29,
+      "name": "debug_accountRange/unsupported",
+      "category": "Debug",
+      "client_response": "error -32602: invalid argument 3: json: cannot unmarshal number into Go value of type bool",
+      "expected": "error code -32601 (method not found)",
+      "diff": "error code/type mismatch",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 52,
+      "name": "eth_feeHistory/fee-history",
+      "category": "eth",
+      "client_response": "error -32000: request beyond head block: requested 1, head 0",
+      "expected": "error code -32000 (method not supported/no blocks)",
+      "diff": "same error code but message differs; test expects an 'unsupported' error but client returns a different error message because no blocks have been produced yet",
+      "client_log": "WARN [07-29|17:52:18.614] Served eth_feeHistory ... err=\"request beyond head block: requested 1, head 0\""
+    },
+    {
+      "test_id": 53,
+      "name": "eth_gasPrice/get-gas-price",
+      "category": "eth",
+      "client_response": "0xf4240 (1 Gwei)",
+      "expected": "0x430e23400 (18 Gwei)",
+      "diff": "gas price differs: client returns 1 Gwei (default for new Geth), fixture expects 18 Gwei (XDC mainnet value)",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 70,
+      "name": "eth_getBlockByHash/get-full-genesis",
+      "category": "eth",
+      "client_response": "genesis block with miner 0x0000000000000000000000000000000000000000, no penalties/validator/validators/totalDifficulty fields",
+      "expected": "genesis block with miner xdc0000000000000000000000000000000000000000, fields: penalties, validator, validators, totalDifficulty",
+      "diff": "miner field uses 0x prefix instead of xdc; missing penalties/validator/validators/totalDifficulty fields",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 71,
+      "name": "eth_getBlockByHash/get-genesis",
+      "category": "eth",
+      "client_response": "genesis block with miner 0x0000000000000000000000000000000000000000, no penalties/validator/validators/totalDifficulty fields",
+      "expected": "genesis block with miner xdc0000000000000000000000000000000000000000, fields: penalties, validator, validators, totalDifficulty",
+      "diff": "same as get-full-genesis",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 73,
+      "name": "eth_getBlockByNumber/get-earliest",
+      "category": "eth",
+      "client_response": "genesis block (same format as getByHash)",
+      "expected": "genesis block with XDC-specific fields",
+      "diff": "same miner/field diff as getBlockByHash",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 74,
+      "name": "eth_getBlockByNumber/get-full-genesis",
+      "category": "eth",
+      "client_response": "genesis block with full transactions",
+      "expected": "genesis block with XDC-specific fields",
+      "diff": "same miner/field diff as getBlockByHash",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 75,
+      "name": "eth_getBlockByNumber/get-genesis",
+      "category": "eth",
+      "client_response": "genesis block without full transactions",
+      "expected": "genesis block with XDC-specific fields",
+      "diff": "same miner/field diff as getBlockByHash",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 76,
+      "name": "eth_getBlockByNumber/get-latest",
+      "category": "eth",
+      "client_response": "genesis block (latest = genesis at startup)",
+      "expected": "genesis block with XDC-specific fields",
+      "diff": "same miner/field diff as getBlockByHash",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 79,
+      "name": "eth_getBlockFinalityByHash/get-genesis",
+      "category": "eth",
+      "client_response": "33 (finality multiplier/offset)",
+      "expected": "0",
+      "diff": "finality value differs: client returns 33 vs expected 0",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 80,
+      "name": "eth_getBlockFinalityByNumber/get-genesis",
+      "category": "eth",
+      "client_response": "33",
+      "expected": "0",
+      "diff": "same as getBlockFinalityByHash",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 82,
+      "name": "eth_getBlockSignersByHash/get-genesis",
+      "category": "eth",
+      "client_response": "[\"0x0000000000000000000000000000000000000000\"]",
+      "expected": "[]",
+      "diff": "client returns array with zero address instead of empty array for genesis block",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 83,
+      "name": "eth_getBlockSignersByNumber/get-genesis",
+      "category": "eth",
+      "client_response": "[\"0x0000000000000000000000000000000000000000\"]",
+      "expected": "[]",
+      "diff": "same as getBlockSignersByHash",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 87,
+      "name": "eth_getCandidateStatus/get-empty",
+      "category": "eth",
+      "client_response": "{\"capacity\":0,\"epoch\":1,\"status\":\"\",\"success\":false}",
+      "expected": "different format",
+      "diff": "response format differs from fixture",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 127,
+      "name": "eth_getWork/get-work",
+      "category": "eth",
+      "client_response": "error -32601: the method eth_getWork does not exist/is not available",
+      "expected": "error -32000: unsupported",
+      "diff": "error code mismatch: client -32601 vs expected -32000",
+      "client_log": "WARN [07-29|17:52:20.605] Served eth_getWork ... err=\"the method eth_getWork does not exist/is not available\""
+    },
+    {
+      "test_id": 137,
+      "name": "eth_sendTransaction/send-no-account",
+      "category": "eth",
+      "client_response": "error -32000: unknown account",
+      "expected": "error -32600 (invalid request)",
+      "diff": "error code mismatch: client -32000 vs expected -32600",
+      "client_log": "WARN [07-29|17:52:20.836] Served eth_sendTransaction ... err=\"unknown account\""
+    },
+    {
+      "test_id": 142,
+      "name": "eth_syncing/check-syncing",
+      "category": "eth",
+      "client_response": "{\"currentBlock\":\"0x0\",...,\"txIndexRemainingBlocks\":\"0x1\",...} (snapshot sync progress object)",
+      "expected": "false",
+      "diff": "client returns sync progress object instead of false for idle/not-syncing state",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 147,
+      "name": "miner_start/no-signer",
+      "category": "Miner",
+      "client_response": "error -32601: the method miner_start does not exist/is not available",
+      "expected": "error -32000 (no signer error)",
+      "diff": "error code mismatch: client -32601 vs expected -32000",
+      "client_log": "WARN [07-29|17:52:21.040] Served miner_start ... err=\"the method miner_start does not exist/is not available\""
+    },
+    {
+      "test_id": 151,
+      "name": "net_version/get-network-id",
+      "category": "Net",
+      "client_response": "\"89\" (network ID 89)",
+      "expected": "\"51\" (network ID 51)",
+      "diff": "network ID mismatch: client returns 89 instead of 51 (UAE testnet vs Apothem)",
+      "client_log": "N/A (simulator-level comparison)"
+    },
+    {
+      "test_id": 159,
+      "name": "web3_clientVersion/get-client-version",
+      "category": "Web3",
+      "client_response": "\"XDC/v1.17.4-xdc.7-f7818de6-20260728/linux-amd64/go1.26.5\"",
+      "expected": "\"XDC/v1.0.0-stable/linux-amd64/go1.11.6\"",
+      "diff": "version string differs: audit fork has different version info",
+      "client_log": "N/A (simulator-level comparison)"
+    }
+  ],
+  "failure_summary": {
+    "by_category": {
+      "eth (block format)": 6,
+      "eth (finality/signers)": 4,
+      "eth (other)": 5,
+      "XDPoS": 5,
+      "Admin": 1,
+      "Debug": 1,
+      "Miner": 1,
+      "Net": 1,
+      "Web3": 1,
+      "Uncategorized": 1
+    },
+    "root_causes_identified": [
+      "Block response format: miner field uses 0x prefix instead of xdc, missing XDC-specific fields (penalties, validator, validators, totalDifficulty)",
+      "Gas price: default 1 Gwei instead of 18 Gwei (XDC mainnet value)",
+      "Network ID: returns 89 instead of 51 (UAE testnet vs XDC Apothem)",
+      "Syncing: returns sync progress object instead of false when idle",
+      "Error code mismatches: several methods return different JSON-RPC error codes than the xdpos baseline",
+      "XDPoS methods: newer build has different method signatures and error handling",
+      "Version string: audit build version differs from xdpos baseline",
+      "Finality value: returns 33 instead of 0 for genesis block finality",
+      "Signers for genesis: returns zero-address array instead of empty array"
+    ]
+  }
+}
