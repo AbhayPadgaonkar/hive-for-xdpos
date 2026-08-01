@@ -34,3 +34,7 @@ hive.db
 # generated build artifacts
 frontend/.next/
 backend/hive-api.exe
+
+# simulator binaries (built by Hive Docker build)
+simulators/probe/rpc-methods/rpc-methods.exe
+simulators/xdc/rpc-compat/xdc-rpc-compat
